@@ -33,15 +33,15 @@ def is_speech(chunk, chunk_size = 16000, sample_rate = 16000):
     return counter.most_common(1)[0][0]
 
 class CLSforRing:
-    def __init__(self, music_model):
-        # if music_model == "DT":
-        #     with open('ring_music_DT.pkl', 'rb') as f:
-        #         self.music_ring = pickle.load(f)
-        # elif music_model == "RF":
-        #     with open('ring_music_RF.pkl', 'rb') as f:
-        #         self.music_ring = pickle.load(f)
-        # else:
-        #     raise Warning("Select music model : DT / RF")
+    def __init__(self, music_model = "RF"):
+        if music_model == "DT":
+            with open('ring_music_DT.pkl', 'rb') as f:
+                self.music_ring = pickle.load(f)
+        elif music_model == "RF":
+            with open('ring_music_RF.pkl', 'rb') as f:
+                self.music_ring = pickle.load(f)
+        else:
+            raise Warning("Select music model : DT / RF")
         self.labels = np.load('ring_label.npy')
         sys_specs = np.load('ring_spec.npy')
         self.sys_specs = np.reshape(sys_specs, (sys_specs.shape[0], -1))
@@ -71,7 +71,11 @@ class CLSforRing:
         distances = self.calculate_similarity(x)
         if np.sort(distances)[0][0] < 0.05:
             top_idxs = np.argsort(distances)[0][0]
-            return self.idx2ring[self.labels[top_idxs]]
+            self.ring_preds.append(self.idx2ring[self.labels[top_idxs]])
+            return self.ring_preds[-1]
+        # elif bool(self.music_ring.predict(x).item()):
+        #     return self.ring_preds[-1]
+
         else:
             return "no sys"
             

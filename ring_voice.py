@@ -24,7 +24,7 @@ with open('seld_lite.yml', 'r') as stream:
 cfg = munchify(cfg_dict)
 
 # Set random seed for reproducible
-pl.seed_everything(cfg.seed)
+# pl.seed_everything(cfg.seed)
 
 # ENCODER
 class BaseEncoder(nn.Module):
@@ -161,7 +161,8 @@ class SeldDecoder(nn.Module):
         return output
     
 # BASEMODEL
-class BaseModel(pl.LightningModule):
+# class BaseModel(pl.LightningModule):
+class BaseModel(nn.Module):
     def __init__(self, sed_threshold: float = 0.3, doa_threshold: int = 20, label_rate: int = 10,
                  feature_rate: int = None, optimizer_name: str = 'Adam', lr: float = 1e-3, output_pred_dir: str = None,
                  submission_dir: str = None, test_chunk_len: int = None, test_chunk_hop_len: int = None,
