@@ -34,14 +34,14 @@ def is_speech(chunk, chunk_size = 16000, sample_rate = 16000):
 
 class CLSforRing:
     def __init__(self, music_model = "RF"):
-        if music_model == "DT":
-            with open('ring_music_DT.pkl', 'rb') as f:
-                self.music_ring = pickle.load(f)
-        elif music_model == "RF":
-            with open('ring_music_RF.pkl', 'rb') as f:
-                self.music_ring = pickle.load(f)
-        else:
-            raise Warning("Select music model : DT / RF")
+        # if music_model == "DT":
+        #     with open('ring_music_DT.pkl', 'rb') as f:
+        #         self.music_ring = pickle.load(f)
+        # elif music_model == "RF":
+        #     with open('ring_music_RF.pkl', 'rb') as f:
+        #         self.music_ring = pickle.load(f)
+        # else:
+        #     raise Warning("Select music model : DT / RF")
         self.labels = np.load('ring_label.npy')
         sys_specs = np.load('ring_spec.npy')
         self.sys_specs = np.reshape(sys_specs, (sys_specs.shape[0], -1))
