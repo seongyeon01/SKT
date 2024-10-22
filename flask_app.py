@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 device = torch.device('cuda:1')
 model = ring_voice.model
-model.load_state_dict(torch.load("/home/ubuntu/jupyter/SKT/log/ring_voice_binary_2/model.pt"))
+model.load_state_dict(torch.load("./model.pt"))
 model.to(device)
 model.eval()
 
