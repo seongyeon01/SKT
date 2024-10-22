@@ -8,7 +8,6 @@
    ```bash
    pip install -r requirements.txt
 
-
 ### Runnig
 ```bash
 python flask_app.py
